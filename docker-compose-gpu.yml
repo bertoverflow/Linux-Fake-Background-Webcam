@@ -1,17 +1,24 @@
 version: '3'
 services:
-    bodypix:
-        image: bodypix
+    bodypix-gpu:
+        image: bodypix-gpu
         build:
             context: ./bodypix
+            dockerfile: bodypix/Dockerfile.gpu
         read_only: true
+        volumes:
+            - communication_volume:/socket
+        environment:
+            PORT: "/socket/bodypix.sock"
+        command: --gpus=all --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864
 
-    fakecam:
-        image: fakecam
+    fakecam-gpu:
+        image: fakecam-gpu
         build:
             context: ./fakecam
         read_only: true
         volumes:
+            - communication_volume:/socket
             - /home/pczarkowski/Pictures/bg.jpg:/src/background.jpg:ro
         #   - /path/to/foreground.jpg:/src/foreground.jpg:ro
         #   - /path/to/foreground-mask.png:/src/foreground-mask.png:ro
@@ -21,5 +28,8 @@ services:
             # output (virtual webcam)
             - /dev/video0:/dev/video2
         depends_on:
-            - bodypix
-        command: --bodypix-url http://bodypix:9000/ --no-foreground
+            - bodypix-gpu
+        command: --bodypix-url /socket/bodypix.sock --no-foreground --scale-factor 1
+
+volumes:
+    communication_volume:

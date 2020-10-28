@@ -44,7 +44,15 @@ You should create a copy of `docker-compose.yml` and change to meet your needs:
 * Docker
 * [Nvidia Docker](https://github.com/NVIDIA/nvidia-docker#quickstart)
 
-### Configuration
+### Using docker-compose
+
+Just use the provided `docker-compose-gpu.yml` and adjust the images (volumes) and device as described above:
+
+```bash
+docker-compose -f docker-compose-gpu.yml up
+```
+
+### Manual Steps
 
 
 Build Images:
