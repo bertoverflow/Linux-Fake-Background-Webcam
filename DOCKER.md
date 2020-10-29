@@ -2,9 +2,11 @@
 
 ## Docker Compose (CPU)
 
-### Prerequisite
+### Prerequisites
 
-You need to have *docker* and *docker-compose* available and the *correct version of v4l2loopback* installed.
+* v4l2loopback
+* docker
+* docker-compose 
 
 ### Configuration
 
@@ -41,7 +43,8 @@ You should create a copy of `docker-compose.yml` and change to meet your needs:
 ### Prerequisites
 
 * v4l2loopback
-* Docker
+* docker
+* docker-compose >= 1.27.0 (to support the `runtime` configuration in the docker-compose file)
 * [Nvidia Docker](https://github.com/NVIDIA/nvidia-docker#quickstart)
 
 ### Using docker-compose
@@ -52,8 +55,12 @@ Just use the provided `docker-compose-gpu.yml` and adjust the images (volumes) a
 docker-compose -f docker-compose-gpu.yml up
 ```
 
-### Manual Steps
+When you stop the services make sure to delete the volumes too!
+```bash
+docker-compose -f docker-compose-gpu.yml down --volumes
+```
 
+### Manual Steps
 
 Build Images:
 
