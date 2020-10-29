@@ -1,5 +1,14 @@
 # Linux-Fake-Background-Webcam with Docker
 
+## Configuration
+
+Docker-Compose will automatically read/create environment variables from an [.env-file](https://docs.docker.com/compose/environment-variables/#the-env-file)
+
+So just copy the provided default-file and modify as needed:
+```shell script
+cp defaults.env .env
+```
+
 ## Docker Compose (CPU)
 
 ### Prerequisites
@@ -8,35 +17,11 @@
 * docker
 * docker-compose 
 
-### Configuration
-
-You should create a copy of `docker-compose.yml` and change to meet your needs:
-
-- add a customer background image using a volume mapping:
-  ```
-      fakecam:
-          # ...
-          volumes:
-            - /path/to/background.jpg:/src/background.jpg:ro
-          # ...
-  ```
-
-- change the device mappings if you are using diffent devices:
-  ```
-      fakecam:
-          # ...
-          devices:
-              # input (webcam)
-              - /dev/video0:/dev/video0
-              # output (virtual webcam)
-              - /dev/video1:/dev/video2
-          # ...
-  ```
 ### Usage
+
  - Run and initial build containers: ``docker-compose up`` (or ``docker-compose up -d``)
  - Stop and remove containers: ``docker-compose down``
  - Note: *Ctrl-C* is currently stops the containers instead of changing images
-
 
 ## Docker (GPU)
 
@@ -49,7 +34,7 @@ You should create a copy of `docker-compose.yml` and change to meet your needs:
 
 ### Using docker-compose
 
-Just use the provided `docker-compose-gpu.yml` and adjust the images (volumes) and device as described above:
+Works similar to the CPU-version, but you have to provide the docker-compose filename to use.
 
 ```bash
 docker-compose -f docker-compose-gpu.yml up
@@ -60,12 +45,12 @@ When you stop the services make sure to delete the volumes too!
 docker-compose -f docker-compose-gpu.yml down --volumes
 ```
 
-### Manual Steps
+## Manual via docker only
 
 Build Images:
 
 ```bash
-docker build -t bodypix -f ./bodypix/Dockerfile.gpu ./bodypix
+docker build -t bodypix -f ./bodypix/Dockerfile-gpu ./bodypix
 docker build -t fakecam ./fakecam
 ```
 

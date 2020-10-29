@@ -14,14 +14,14 @@ services:
             context: ./fakecam
         read_only: true
         volumes:
-            - /home/pczarkowski/Pictures/bg.jpg:/src/background.jpg:ro
-        #   - /path/to/foreground.jpg:/src/foreground.jpg:ro
-        #   - /path/to/foreground-mask.png:/src/foreground-mask.png:ro
+            - ${BACKGROUND_IMAGE_PATH}:/src/background.jpg:ro
+            - ${FOREGROUND_IMAGE_PATH}:/src/foreground.jpg:ro
+            - ${FOREGROUND_MASK_IMAGE_PATH}:/src/foreground-mask.png:ro
         devices:
             # input (webcam)
-            - /dev/video3:/dev/video0
+            - ${INPUT_DEVICE}:/dev/video0
             # output (virtual webcam)
-            - /dev/video0:/dev/video2
+            - ${OUTPUT_DEVICE}:/dev/video2
         depends_on:
             - bodypix
-        command: --bodypix-url http://bodypix:9000/ --no-foreground
+        command: --bodypix-url http://bodypix:9000/ ${FAKE_PY_ADDITIONAL_OPTIONS_CPU}
