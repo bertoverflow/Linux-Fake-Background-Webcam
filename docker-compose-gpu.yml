@@ -1,7 +1,8 @@
-version: '3'
+version: '3.7'
 services:
     bodypix-gpu:
         image: bodypix-gpu
+        init: true
         build:
             context: ./bodypix
             dockerfile: Dockerfile.gpu
@@ -18,6 +19,7 @@ services:
 
     fakecam-gpu:
         image: fakecam-gpu
+        init: true
         build:
             context: ./fakecam
         read_only: true
