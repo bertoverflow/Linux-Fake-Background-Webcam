@@ -1,5 +1,9 @@
 # Linux-Fake-Background-Webcam with Docker
 
+Note that on my machine the CPU-version can be used instantaneously while the GPU-version
+needs around 5 minutes until it is available (to be more precise: the bodypix-container).
+Also the GPU-version seems to be slower, so maybe there are things not correctly configured...
+
 ## Configuration
 
 Docker-Compose will automatically read/create environment variables from an [.env-file](https://docs.docker.com/compose/environment-variables/#the-env-file)
