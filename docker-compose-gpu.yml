@@ -5,7 +5,7 @@ services:
         init: true
         build:
             context: ./bodypix
-            dockerfile: bodypix/Dockerfile-gpu
+            dockerfile: Dockerfile-gpu
         read_only: true
         volumes:
             - communication_volume:/socket
