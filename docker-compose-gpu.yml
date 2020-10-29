@@ -4,13 +4,17 @@ services:
         image: bodypix-gpu
         build:
             context: ./bodypix
-            dockerfile: bodypix/Dockerfile.gpu
+            dockerfile: Dockerfile.gpu
         read_only: true
         volumes:
             - communication_volume:/socket
         environment:
             PORT: "/socket/bodypix.sock"
-        command: --gpus=all --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864
+        shm_size: 1gb
+        ulimits:
+            memlock: -1
+            stack: 67108864
+        runtime: nvidia
 
     fakecam-gpu:
         image: fakecam-gpu
