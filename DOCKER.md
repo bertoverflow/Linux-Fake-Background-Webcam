@@ -46,9 +46,11 @@ Works similar to the CPU-version, but you have to provide the docker-compose fil
 docker-compose -f docker-compose-gpu.yml up
 ```
 
-When you stop the services make sure to delete the volumes too!
+When you stop the services make sure to delete the communication-volume (since the socket in this volume
+is currently not closed correctly):
 ```bash
 docker-compose -f docker-compose-gpu.yml down --volumes
+docker volume rm linux-fake-background-webcam_communication_volume
 ```
 
 If you only want to switch the image (i.e. make changes in the `.env` file), you can just "restart"
