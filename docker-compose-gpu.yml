@@ -1,4 +1,8 @@
 version: '3.7'
+
+# We use a cache for CUDA so only the first startup takes a lot of time (> 5 min.)
+# https://developer.nvidia.com/blog/cuda-pro-tip-understand-fat-binaries-jit-caching/
+
 services:
     bodypix-gpu:
         image: bodypix-gpu
@@ -9,8 +13,12 @@ services:
         read_only: true
         volumes:
             - communication_volume:/socket
+            - compute_cache:/root/.nv/ComputeCache
         environment:
-            PORT: "/socket/bodypix.sock"
+            - PORT=/socket/bodypix.sock
+            - CUDA_CACHE_MAXSIZE=2147483647
+            - CUDA_CACHE_DISABLE=0
+            - CUDA_CACHE_PATH=/root/.nv/ComputeCache
         shm_size: 1gb
         ulimits:
             memlock: -1
@@ -39,3 +47,4 @@ services:
 
 volumes:
     communication_volume:
+    compute_cache:

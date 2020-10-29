@@ -1,9 +1,5 @@
 # Linux-Fake-Background-Webcam with Docker
 
-Note that on my machine the CPU-version can be used instantaneously while the GPU-version
-needs around 5 minutes until it is available (to be more precise: the bodypix-container).
-However, the GPU-version is more potent when finally running.
-
 ## Configuration
 
 Docker-Compose will automatically read/create environment variables from an [.env-file](https://docs.docker.com/compose/environment-variables/#the-env-file)
@@ -28,6 +24,12 @@ cp defaults.env .env
  - Note: *Ctrl-C* is currently stops the containers instead of changing images
 
 ## Docker (GPU)
+
+Note: The first time you start the GPU-version it will take a long time until the
+virtual cam can be used (around 5 min.). This is because CUDA does a lot of JIT-Caching
+when started for the first time. However, we can just use a volume for this cache.
+The subsequent start will be super fast.
+See: https://developer.nvidia.com/blog/cuda-pro-tip-understand-fat-binaries-jit-caching/
 
 ### Prerequisites
 
