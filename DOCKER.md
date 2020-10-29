@@ -2,7 +2,7 @@
 
 Note that on my machine the CPU-version can be used instantaneously while the GPU-version
 needs around 5 minutes until it is available (to be more precise: the bodypix-container).
-Also the GPU-version seems to be slower, so maybe there are things not correctly configured...
+However, the GPU-version is more potent when finally running.
 
 ## Configuration
 
@@ -47,6 +47,13 @@ docker-compose -f docker-compose-gpu.yml up
 When you stop the services make sure to delete the volumes too!
 ```bash
 docker-compose -f docker-compose-gpu.yml down --volumes
+```
+
+If you only want to switch the image (i.e. make changes in the `.env` file), you can just "restart"
+the fakecam-container:
+```shell script
+docker-compose -f docker-compose-gpu.yml stop fakecam-gpu
+docker-compose -f docker-compose-gpu.yml up -d fakecam-gpu
 ```
 
 ## Manual via docker only
