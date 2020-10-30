@@ -138,6 +138,13 @@ the virtual webcam very easy and convenient. The only downside is that you
 lose the ability to change background and foreground images on the fly.
 
 ## Usage
+
+To find the device number of your webcam you might consider `v4l2-ctl`:
+```
+sudo apt-get install v4l-utils
+v4l2-ctl --list-devices
+```
+
 Assuming you are not using the Docker version, please also make sure that your
 TCP port ``127.0.0.1:9000`` is free, as we will be using it.
 
