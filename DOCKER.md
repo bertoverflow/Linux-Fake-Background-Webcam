@@ -9,11 +9,17 @@ So just copy the provided default-file and modify as needed:
 cp defaults.env .env
 ```
 
+To find the device number of your webcam you might consider `v4l2-ctl`:
+```
+sudo apt-get install v4l-utils
+v4l2-ctl --list-devices
+```
+
 ## Docker Compose (CPU)
 
 ### Prerequisites
 
-* v4l2loopback
+* v4l2loopback, see [main readme](README.md)
 * docker
 * docker-compose 
 
@@ -33,7 +39,7 @@ See: https://developer.nvidia.com/blog/cuda-pro-tip-understand-fat-binaries-jit-
 
 ### Prerequisites
 
-* v4l2loopback
+* v4l2loopback, see [main readme](README.md)
 * docker
 * docker-compose >= 1.27.0 (to support the `runtime` configuration in the docker-compose file)
 * [Nvidia Docker](https://github.com/NVIDIA/nvidia-docker#quickstart)

@@ -21,6 +21,14 @@ of `/dev/nvidia0` to determine if there is a GPU present. By
 downscaling the image sent to bodypix neural network, and upscaling the
 received mask, this whole setup runs sufficiently fast under Intel i7-4900MQ.
 
+## To docker or not to docker
+
+You can either use this project with `docker` or install everything on your host.
+If you want to use `docker`, Please refer to [DOCKER.md](DOCKER.md). The updated Docker related files were
+added by [liske](https://github.com/liske).
+Using Docker is unnecessary. However it makes starting up and shutting down
+the virtual webcam very easy and convenient.
+
 ## Prerequisite
 You need to install either v4l2loopback or akvcam. This repository was
 originally written with v4l2loopback in mind. However, there has been report
@@ -86,7 +94,7 @@ This may apply for other versions of Ubuntu as well. For more information,
 please refer to the following Github
 [issue](https://github.com/jremmons/pyfakewebcam/issues/7#issuecomment-616617011).
 
-### Akvcam
+### Akvcam (as Alternative to v4l2loopback)
 To install akvcam, you need to do the following:
 1. Install the driver by following the instruction at
 [Akvcam wiki](https://github.com/webcamoid/akvcam/wiki/Build-and-install). I
@@ -128,14 +136,6 @@ Node.js, please follow the instructions at
 Simply run
 
     ./install.sh
-
-### Installing with Docker
-Please refer to [DOCKER.md](DOCKER.md). The updated Docker related files were
-added by [liske](https://github.com/liske).
-
-Using Docker is unnecessary. However it makes starting up and shutting down
-the virtual webcam very easy and convenient. The only downside is that you
-lose the ability to change background and foreground images on the fly.
 
 ## Usage
 
